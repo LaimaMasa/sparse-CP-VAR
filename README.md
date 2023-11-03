@@ -1,13 +1,15 @@
 # Sparse change point vector autoregression, or sparse CP-VAR(p)
 
-## Abstract
+## Overview
 
-When modeling long economic and financial time series, several problems of parameter estimation arise, often due to the ignorance of structural breaks. To overcome these problems, change point methods can be incorporated into the models.
+The sparse CP-VAR(p) model is developed using several sophisticated statistical building blocks:
+- VAR(p) model large multivariate autoregression model denoted by parameters n - number of time series, and p - number of lags in the time series. The total number of parameters in such a model is (n × p + 1) × n,
+- Sparsity, or parameter penalization technique that shrinks irrelevant parameter values to zero,
+- Change or break points, which identify the point in time at which the parameters of the model change drastically,
+- MCMC with Gibbs Sampling is an approach to perform Monte Carlo Markov Chain sampling using a special case of the Metropolis-Hastings algorithm, where we sample parameter values from fully conditional distributions.
 
-In this thesis, we implement the sparse change point vector autoregressive model (CP-VAR(p)) using the Just Another Gibbs Sampler (JAGS) program. This model is known for its rich parameterization, which can lead to a large number of parameters when dealing with multiple regimes. To mitigate this problem, [Dufays et al., 2021] proposed shrinkage priors to shrink the parameters of irrelevant regimes to zero. The aim of this study is to use the sparse CP-VAR(p) model to detect the number of change points in mean parameters in time series.
+This model is implemented with: 
+- R software,
+- JAGS (Just Another Gibbs Sampling), an open-source statistical inference tool for hierarchical Bayesian methods, accessed via the R package runjags.
 
-To evaluate the robustness of the model in detecting change points, we first perform a simulation study on a bivariate CP-VAR(1) data generation process using JAGS. We can identify two out of three change points in a simulated time series of T = 500. However, our model had slightly poorer change point detection performance in the shorter time series of T =120. Also, our model can identify the absence of the change points in most cases. Unfortunately, the computational power of our machine limits the scope of a more extensive simulation study.
-
-We then apply the model to two financial and economic datasets that include monthly observations between 2013 and 2022. The first dataset includes log returns of stylized stock indices (value and growth) and changes in the Consumer Price Index (CPI), while the second dataset includes variables from energy markets and two macro variables. In both experiments, we set the lag to p=1 and find that no change point is detected with the methodology used. However, we identify some interesting and significant variables.
-
-In summary, our study demonstrates the effectiveness of our sparse CP-VAR(p) model in detecting change points on simulated data. We also show the capabilities of our model in identifying the change points and significant parameter values in time series of financial and economic data.
+The original model was developed in [Dufays et al. 2021]. The coded implementation provided here is part of my master's thesis, and contains several deviations from the original model.
