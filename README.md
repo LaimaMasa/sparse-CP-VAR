@@ -1,4 +1,4 @@
-# Sparse-CP-VAR
+# Sparse change point vector autoregression, or sparse CP-VAR(p)
 
 ## Abstract
 
